@@ -4,7 +4,7 @@ nodecmu
 Utils classes to use digital sensor (like ipsensor) or led
 
 # Using Sensor.lua example :
-
+```
 dofile("Sensor.lua")
 --[[instanciate sensor]]--
 local mySensor = Sensor:new()
@@ -21,9 +21,9 @@ end
 mySensor.pin = 2
 --[[start listener]]--
 mySensor:listen()
-
+```
 # Using Led.lua example :
-
+```
 dofile("Led.lua")
 --[[instanciate led with specified pin (5)]]--
 local led = Led:new(5)
@@ -43,4 +43,4 @@ led:blink(200, 5000 , function()
 	--[[blink the led with period 50ms during 3000ms]]--
     led:blink(50,3000)
 end)
- 
+```

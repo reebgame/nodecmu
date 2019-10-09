@@ -14,15 +14,30 @@ print("pin=" .. pin)
    return o
 end
 
-function Led:on()
+function Led:on(time, endCallback)
     if self.pin ~= nil then
-        gpio.write(self.pin,gpio.HIGH)
+        if self.isOn == true then
+			self:off()
+		end
+		gpio.write(self.pin,gpio.HIGH)
         self.isOn = true
         if self.onEvent ~= nil then
             evt = {}
             evt.type = "on"
             self.onEvent(evt)
         end
+		if time ~= nil then
+			self.timeTimer = tmr.create()
+			self.timeTimer:register(time, tmr.ALARM_SINGLE,
+            function()
+                self.timeTimer = nil
+                self:off()
+                if endCallback ~= nil then
+                    endCallback()
+                end
+            end)
+			self.timeTimer:start()		
+		end
     end
 end
 

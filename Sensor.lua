@@ -1,9 +1,9 @@
 Sensor = {} -- the table representing the class, which will double as the metatable for the instances
 
-function Sensor:new (o)
+function Sensor:new (pin)
    o = o or {}
    o.onEvent = nil
-   o.pin = nil
+   o.pin = pin
    o.level = 0
    setmetatable(o, self)
    self.__index = self
@@ -12,15 +12,11 @@ end
 
 
 function Sensor:listen()
-
-    print("Sensor:listen")
     
     local _self = self
-    print("_self.level=" .. _self.level)
     
     function trigEventCallback(level)
         if level ~= _self.level then
-            print("new level :" .. level)
             _self.level = level
             if _self.onEvent ~= nil then
                 _self.onEvent(level)

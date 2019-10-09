@@ -1,7 +1,7 @@
 Led = {} -- the table representing the class, which will double as the metatable for the instances
 
 function Led:new(pin)
-print("pin=" .. pin)
+
    o = o or {}
    o.onEvent = nil
    o.pin = pin
@@ -59,12 +59,8 @@ function Led:blink(delay, time, endCallback)
         self.blinkTimer:unregister()
         self.blinkTimer = nil
     end
-    
-    print("delay" .. delay)
-    
+       
     self:off()
-
-
     
     self.blinkTimer = tmr.create()
     self.blinkTimer:register(delay, tmr.ALARM_AUTO , 
@@ -79,7 +75,6 @@ function Led:blink(delay, time, endCallback)
     self.blinkTimer:start()
 
     if time ~= nil then
-        print("time" .. time)
         self.timeTimer = tmr.create()
         self.timeTimer:register(time, tmr.ALARM_SINGLE,
             function()
